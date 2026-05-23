@@ -1,139 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta property="og:title" content="NABTAR — Indie Game Studio">
-<meta property="og:description" content="We build games that feel different — fast, unexpected, and impossible to put down.">
-<meta property="og:image" content="https://your-username.github.io/nabtar/preview.jpg">
-<meta property="og:url" content="https://your-username.github.io/nabtar/">
-<meta name="twitter:card" content="summary_large_image">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>NABTAR — Indie Game Studio</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-.particles-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.hero, .ethos {
-  position: relative;
-  overflow: hidden;
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">  
+<title>NABTAR — Indie Game Studio</title>  
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  
+<style>  
+.particles-canvas {  
+  position: absolute;  
+  top: 0;  
+  left: 0;  
+  width: 100%;  
+  height: 100%;  
+  pointer-events: none;  
+  z-index: 1;  
+}  .hero, .ethos {
+position: relative;
+overflow: hidden;
 }
 
 /* تأثير zoom بسيط للصور عند hover */
 .feat-img-side img {
-  transition: transform 0.5s ease, opacity 0.4s ease;
+transition: transform 0.5s ease, opacity 0.4s ease;
 }
 
 /* تأثير ظهور متأخر للأقسام عند السكرول */
 section {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+opacity: 0;
+transform: translateY(30px);
+transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 section.visible {
-  opacity: 1;
-  transform: translateY(0);
+opacity: 1;
+transform: translateY(0);
 }
 
 /* تأثير للـ Hero عند تحميل الصفحة */
 .hero-l,
 .hero-r {
-  animation: fadeInUp 0.8s ease forwards;
+animation: fadeInUp 0.8s ease forwards;
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+from {
+opacity: 0;
+transform: translateY(40px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
 }
 
 /* خلفية Hero بصورة سايبربانك */
 .hero {
-  background: linear-gradient(135deg, rgba(0,0,0,.85) 0%, rgba(0,30,15,.8) 100%), url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+background: linear-gradient(135deg, rgba(0,0,0,.85) 0%, rgba(0,30,15,.8) 100%), url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format');
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
 }
 
 /* خلفية Ethos بصورة روبوتات وتقنية */
 .ethos {
-  background: linear-gradient(0deg, rgba(13,13,13,.92), rgba(13,13,13,.88)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&auto=format');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+background: linear-gradient(0deg, rgba(13,13,13,.92), rgba(13,13,13,.88)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&auto=format');
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
 }
 
 section{
-  position:relative;
+position:relative;
 }
 
 section::after{
-  content:'';
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:100%;
-  height:1px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(0,196,106,.08),
-    transparent
-  );
+content:'';
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+height:1px;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(0,196,106,.08),
+transparent
+);
 }
 
 :root{
-  --g:#00c46a;--g2:#00e87a;
-  --bg:#0d0d0d;--bg2:#111111;
-  --s1:#181818;--s2:#202020;--s3:#2a2a2a;
-  --hi:#f0f0f0;--mid:#707070;--lo:#353535;
+--g:#00c46a;--g2:#00e87a;
+--bg:#0d0d0d;--bg2:#111111;
+--s1:#181818;--s2:#202020;--s3:#2a2a2a;
+--hi:#f0f0f0;--mid:#707070;--lo:#353535;
 }
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+,::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 ::-webkit-scrollbar{width:2px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--g);}
 body{background:var(--bg);color:var(--hi);font-family:'Syne',sans-serif;overflow-x:hidden;cursor:none;}
 
-/* ============================================ */
-/* === SCANLINES EFFECT ADDED === */
-/* ============================================ */
+/* ============================================ /
+/ === SCANLINES EFFECT ADDED === /
+/ ============================================ /
 body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9998;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.08) 0px,
-    rgba(0, 0, 0, 0.08) 2px,
-    transparent 2px,
-    transparent 6px
-  );
-  box-shadow: inset 0 0 50px rgba(0,0,0,0.3);
+content: "";
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+z-index: 9998;
+background: repeating-linear-gradient(
+0deg,
+rgba(0, 0, 0, 0.08) 0px,
+rgba(0, 0, 0, 0.08) 2px,
+transparent 2px,
+transparent 6px
+);
+box-shadow: inset 0 0 50px rgba(0,0,0,0.3);
 }
 body::after {
-  z-index: 9999;
+z-index: 9999;
 }
-/* ============================================ */
+/ ============================================ */
 
 /* ─── CURSOR ─── */
 #cur{position:fixed;top:0;left:0;z-index:99999;pointer-events:none;}
@@ -296,8 +289,7 @@ section{padding:7rem 0;position:relative;}
 .blink-dot{animation:blinkAnim 1s step-end infinite;}
 @keyframes blinkAnim{0%,100%{opacity:1;}50%{opacity:0;}}
 
-/* ─── FOOTER ─── */
-footer{border-top:1px solid var(--s2);padding:2.5rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
+.footer{border-top:1px solid var(--s2);padding:2.5rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;}
 .f-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:8px;color:var(--hi);text-decoration:none;}
 .f-logo .accent{color:var(--g);}
 .f-socials{display:flex;gap:1.5rem;}
@@ -305,281 +297,254 @@ footer{border-top:1px solid var(--s2);padding:2.5rem 4rem;display:flex;align-ite
 .f-socials a:hover{color:var(--g);}
 .f-copy{font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:2px;color:var(--lo);text-transform:uppercase;}
 @media(max-width:768px){footer{padding:2rem 1.5rem;flex-direction:column;align-items:flex-start;}}
-/* تم إضافة هذه القاعدة CSS */
+/ تم إضافة هذه القاعدة CSS */
 .hero-vignette {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(0,0,0,.55) 100%);
+position: absolute;
+inset: 0;
+z-index: 2;
+pointer-events: none;
+background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(0,0,0,.55) 100%);
 }
 </style>
-</head>
-<body>
-<div id="cur"><div class="cur-dot"></div><div class="cur-ring"></div></div>
 
-<nav>
-  <a href="#" class="n-logo"><div class="dot"></div>NAB<span style="color:var(--g)">T</span>AR</a>
-  <ul class="n-links">
-    <li><a href="#featured">Featured</a></li>
-    <li><a href="#games">Games</a></li>
-    <li><a href="#team">Team</a></li>
-    <li><a href="#ethos">Ethos</a></li>
-    <li><a href="#trailer">Trailer</a></li>
-  </ul>
-  <div class="n-socials">
-    <a href="https://youtube.com/@nabtaxstudio" target="_blank"><i class="fab fa-youtube"></i></a>
-    <a href="https://nabtax-studio.itch.io/" target="_blank"><i class="fab fa-itch-io"></i></a>
-    <a href="https://discord.gg/ZfpJCPSvS5" target="_blank"><i class="fab fa-discord"></i></a>
-  </div>
-  <div class="n-prog" id="navProg"></div>
-</nav>
-
-<!-- HERO -->
-<section class="hero" id="home">
-  <!-- تم إضافة هذا العنصر داخل قسم hero -->
-  <div class="hero-vignette"></div>
-  <canvas id="heroCanvas"></canvas>
-  <div class="hero-glow"></div>
-  <div class="hero-vignette"></div>
-  <div class="hero-lines"></div>
-
-  <div class="hero-split">
-    <div class="hero-l">
-      <div class="hero-tag">Indie Game Studio &nbsp;·&nbsp; Est. 2025</div>
-      <h1 class="hero-h">
-        <span class="line1">NABTAR</span>
-        <span class="line2">STUDIO</span>
-      </h1>
-      <p class="hero-desc">We're a 7-person team building games that feel different — fast, unexpected, and impossible to put down.</p>
-      <div class="hero-cta">
-        <a href="#featured" class="btn btn-primary"><span>See Our Game</span> <i class="fas fa-arrow-right"></i></a>
-        <a href="https://discord.gg/ZfpJCPSvS5" target="_blank" class="btn btn-outline">Join Discord</a>
-      </div>
-    </div>
-    
-  </div>
-</section>
-
-<!-- FEATURED -->
-<section id="featured">
-  <div class="wrap">
-    <div class="s-label rv"><span></span> 01 — Featured</div>
-    <div class="feat rv">
-      <div class="feat-img-side">
-        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=700&auto=format&fit=crop&q=80" alt="Out Of Service">
-        <div class="feat-overlay"></div>
-        <div class="feat-badge">Featured Game</div>
-      </div>
-      <div class="feat-info">
-        <div class="feat-genre">Arcade / Action</div>
-        <h3 class="feat-name">Out Of<br>Service</h3>
-        <div class="feat-line"></div>
-        <div class="feat-meta">
-          <span><i class="fas fa-calendar-alt"></i>202?</span>
-          <span><i class="fas fa-mobile-alt"></i>Mobile / PC</span>
-        </div>
-        <p class="feat-desc">A huge mall, locked doors, and only one way out. Drag and move through fast-paced arcade challenges, dodge obstacles, and find your escape before time runs out.</p>
-        <a href="https://discord.gg/ZfpJCPSvS5" target="_blank" class="btn btn-primary"><span>Learn More</span> <i class="fas fa-arrow-right"></i></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GAMES -->
-<section id="games">
-  <div class="wrap">
-    <div class="s-label rv"><span></span> 02 — Games</div>
-    <h2 class="s-title rv">All <em>Games</em></h2>
-    <div class="games-grid">
-      <div class="game-card rv">
-        <div class="gc-thumb">
-          <div class="gc-corners">
-            <div class="gc-corner-el tl"></div><div class="gc-corner-el tr"></div>
-            <div class="gc-corner-el bl"></div><div class="gc-corner-el br"></div>
-          </div>
-          <div class="soon-badge">SOON</div>
-        </div>
-        <div class="gc-info">
-          <div class="gc-name">Out Of Service</div>
-          <div class="gc-genre">Arcade / Action</div>
-          <div class="gc-yr">TBA — 202?</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TEAM -->
-<section id="team">
-  <div class="wrap">
-    <div class="s-label rv"><span></span> 03 — Team</div>
-    <div class="team-head">
-      <h2 class="s-title" style="margin-bottom:0">The <em>Crew</em></h2>
-      <div class="team-count">07</div>
-    </div>
-    <div class="team-grid" id="teamGrid"></div>
-  </div>
-</section>
-
-<!-- ETHOS -->
-<section id="ethos" class="ethos">
-  <div class="ethos-bg-txt">NABTAR</div>
-  <div class="ethos-inner">
-    <div class="ethos-l">
-      <div class="s-label rv"><span></span> 04 — Ethos</div>
-      <div class="ethos-q rv"><span class="ghost">Designing</span>The <span class="lit">Un</span>expected</div>
-      <p class="ethos-desc rv">Nabtar is driven by passion, creativity, and the belief that games can be more than entertainment. We make experiences that stay with you.</p>
-    </div>
-    <div class="ethos-r">
-      <div class="pillar rv"><div class="pillar-n">01</div><div class="pillar-body"><div class="pillar-ico"><i class="fas fa-fire"></i></div><h3>Passion-Driven</h3><p>Every line of code, every asset — built with genuine love for the craft.</p></div></div>
-      <div class="pillar rv"><div class="pillar-n">02</div><div class="pillar-body"><div class="pillar-ico"><i class="fas fa-lightbulb"></i></div><h3>Experimental</h3><p>We reject the safe path. We explore genres, blend mechanics, and push what indie games can feel like.</p></div></div>
-      <div class="pillar rv"><div class="pillar-n">03</div><div class="pillar-body"><div class="pillar-ico"><i class="fas fa-users"></i></div><h3>Community First</h3><p>We build with our players, not just for them. Feedback shapes everything.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- TRAILER -->
-<section id="trailer">
-  <div class="wrap">
-    <div class="s-label rv"><span></span> 05 — Trailer</div>
-    <h2 class="s-title rv">Official <em>Trailer</em></h2>
-    <div class="trailer-box rv">
-      <div class="t-ico"><i class="fas fa-film"></i></div>
-      <div class="t-h">No Trailer Yet</div>
-      <div class="t-sub">The cinematic universe is loading...</div>
-      <div class="t-tag"><i class="fas fa-circle blink-dot"></i> Coming Soon</div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <a href="#" class="f-logo">NAB<span class="accent">T</span>AR</a>
-  <div class="f-socials">
-    <a href="https://youtube.com/@nabtaxstudio" target="_blank"><i class="fab fa-youtube"></i></a>
-    <a href="https://nabtax-studio.itch.io/" target="_blank"><i class="fab fa-itch-io"></i></a>
-    <a href="https://discord.gg/ZfpJCPSvS5" target="_blank"><i class="fab fa-discord"></i></a>
-  </div>
-  <div class="f-copy">© 2026 Nabtar Studio · Made with passion</div>
-</footer>
-
-<script>
-(function(){
-
-  /* ── CURSOR ── */
-  const curDot = document.querySelector('.cur-dot');
-  const curRing = document.querySelector('.cur-ring');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove',e=>{
-    mx=e.clientX; my=e.clientY;
-    curDot.style.cssText=`left:${mx}px;top:${my}px`;
-  });
-  (function loop(){
-    rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
-    curRing.style.cssText=`left:${rx}px;top:${ry}px`;
-    requestAnimationFrame(loop);
-  })();
-
-  /* ── NAV PROGRESS ── */
-  const prog=document.getElementById('navProg');
-  window.addEventListener('scroll',()=>{
-    prog.style.width=(window.scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';
-  },{passive:true});
-
-  /* ── CANVAS PARTICLES ── */
-  const canvas=document.getElementById('heroCanvas');
-  const ctx=canvas.getContext('2d');
-  let W,H,pts=[];
-  function resize(){
-    W=canvas.width=canvas.offsetWidth;
-    H=canvas.height=canvas.offsetHeight;
-  }
-  resize();
-  window.addEventListener('resize',resize);
-
-  for(let i=0;i<80;i++){
-    pts.push({
-      x:Math.random()*1,y:Math.random()*1,
-      vx:(Math.random()-.5)*.0003,vy:(Math.random()-.5)*.0003,
-      r:Math.random()*1.2+.3,
-      a:Math.random()*.5+.1,
-      green:Math.random()>.85
-    });
-  }
-  let mouse={x:.5,y:.5};
-  canvas.addEventListener('mousemove',e=>{
-    const r=canvas.getBoundingClientRect();
-    mouse.x=(e.clientX-r.left)/W;
-    mouse.y=(e.clientY-r.top)/H;
-  });
-
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    pts.forEach(p=>{
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0)p.x=1; if(p.x>1)p.x=0;
-      if(p.y<0)p.y=1; if(p.y>1)p.y=0;
-      ctx.beginPath();
-      ctx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);
-      ctx.fillStyle=p.green ? `rgba(0,196,106,${p.a})` : `rgba(255,255,255,${p.a*.4})`;
-      ctx.fill();
-    });
-    pts.filter(p=>p.green).forEach((a,i,arr)=>{
-      arr.forEach((b,j)=>{
-        if(j<=i)return;
-        const dx=(a.x-b.x)*W, dy=(a.y-b.y)*H;
-        const dist=Math.sqrt(dx*dx+dy*dy);
-        if(dist<120){
-          ctx.beginPath();
-          ctx.moveTo(a.x*W,a.y*H);
-          ctx.lineTo(b.x*W,b.y*H);
-          ctx.strokeStyle=`rgba(0,196,106,${(.12*(1-dist/120))})`;
-          ctx.lineWidth=.5;
-          ctx.stroke();
-        }
-      });
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-
-  /* ── TEAM ── */
-  const members=[
-    {name:"Abdulrahman Bakoush",role:"CEO & Dev",img:"https://i.postimg.cc/GmykF0SY/New-Project-059188A.png"},
-    {name:"Mazen",role:"Dev & 3D Designer",img:"https://i.postimg.cc/1zBq9yjg/cb98496bcab361b8ce245f7cfa4fb926.png"},
-    {name:"Adel",role:"Dev & Writer",img:"https://i.postimg.cc/Qx9bcgnn/Untitled13-20250701050551.png"},
-    {name:"Hamed",role:"Developer",img:"https://i.postimg.cc/5tStwp5N/Untitled12-20260227144237.png"},
-    {name:"Maaz",role:"Developer",img:"https://i.postimg.cc/C5p9hVKv/IMG-20251221-WA0007-1.jpg"},
-    {name:"Sara",role:"Artist",img:"https://i.postimg.cc/CMtpQxNK/IMG-20250520-203852-921.webp"},
-    {name:"SamKud",role:"Developer",img:"https://i.postimg.cc/3xx5Jt9h/de3465490119b3fd.png"}
-  ];
-  const grid=document.getElementById('teamGrid');
-  members.forEach((m,i)=>{
-    const el=document.createElement('div');
-    el.className='member';
-    el.style.transitionDelay=(i*.07)+'s';
-    el.innerHTML=`<div class="member-frame"><img class="member-pic" src="${m.img}" alt="${m.name}" onerror="this.src='https://placehold.co/76x76/181818/00c46a?text=${encodeURIComponent(m.name[0])}'" loading="lazy"></div><div class="member-name">${m.name}</div><div class="member-role">${m.role}</div>`;
-    grid.appendChild(el);
-  });
-
-  /* ── SCROLL REVEAL ── */
-  const obs=new IntersectionObserver(es=>{
-    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});
-  },{threshold:.08});
-  document.querySelectorAll('.rv,.member').forEach(el=>obs.observe(el));
-
-  /* ── SECTION FADE ON SCROLL ── */
-  const sections = document.querySelectorAll('section');
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.15 });
-  sections.forEach(section => sectionObserver.observe(section));
-
-})();
-</script>
-</body>
+</head>  
+<body>  
+<div id="cur"><div class="cur-dot"></div><div class="cur-ring"></div></div>  <nav>  
+  <a href="#" class="n-logo"><div class="dot"></div>NAB<span style="color:var(--g)">T</span>AR</a>  
+  <ul class="n-links">  
+    <li><a href="#featured">Featured</a></li>  
+    <li><a href="#games">Games</a></li>  
+    <li><a href="#team">Team</a></li>  
+    <li><a href="#ethos">Ethos</a></li>  
+    <li><a href="#trailer">Trailer</a></li>  
+  </ul>  
+  <div class="n-socials">  
+    <a href="https://youtube.com/@nabtaxstudio" target="_blank"><i class="fab fa-youtube"></i></a>  
+    <a href="https://nabtax-studio.itch.io/" target="_blank"><i class="fab fa-itch-io"></i></a>  
+    <a href="https://discord.gg/ZfpJCPSvS5" target="_blank"><i class="fab fa-discord"></i></a>  
+  </div>  
+  <div class="n-prog" id="navProg"></div>  
+</nav>  <!-- HERO -->  <section class="hero" id="home">  
+  <!-- تم إضافة هذا العنصر داخل قسم hero -->  
+  <div class="hero-vignette"></div>  
+  <canvas id="heroCanvas"></canvas>  
+  <div class="hero-glow"></div>  
+  <div class="hero-vignette"></div>  
+  <div class="hero-lines"></div>    <div class="hero-split">  
+    <div class="hero-l">  
+      <div class="hero-tag">Indie Game Studio &nbsp;·&nbsp; Est. 2025</div>  
+      <h1 class="hero-h">  
+        <span class="line1">NABTAR</span>  
+        <span class="line2">STUDIO</span>  
+      </h1>  
+      <p class="hero-desc">We're a 8-person team building games that feel different — fast, unexpected, and impossible to put down.</p>  
+      <div class="hero-cta">  
+        <a href="#featured" class="btn btn-primary"><span>See Our Game</span> <i class="fas fa-arrow-right"></i></a>  
+        <a href="https://discord.gg/ZfpJCPSvS5" target="_blank" class="btn btn-outline">Join Discord</a>  
+      </div>  
+    </div>    </div>  
+</section>  <!-- FEATURED -->  <section id="featured">  
+  <div class="wrap">  
+    <div class="s-label rv"><span></span> 01 — Featured</div>  
+    <div class="feat rv">  
+      <div class="feat-img-side">  
+        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=700&auto=format&fit=crop&q=80" alt="Out Of Service">  
+        <div class="feat-overlay"></div>  
+        <div class="feat-badge">Featured Game</div>  
+      </div>  
+      <div class="feat-info">  
+        <div class="feat-genre">Arcade / Action</div>  
+        <h3 class="feat-name">Out Of<br>Service</h3>  
+        <div class="feat-line"></div>  
+        <div class="feat-meta">  
+          <span><i class="fas fa-calendar-alt"></i>202?</span>  
+          <span><i class="fas fa-mobile-alt"></i>Mobile / PC</span>  
+        </div>  
+        <p class="feat-desc">A huge mall, locked doors, and only one way out. Drag and move through fast-paced arcade challenges, dodge obstacles, and find your escape before time runs out.</p>  
+        <a href="https://discord.gg/ZfpJCPSvS5" target="_blank" class="btn btn-primary"><span>Learn More</span> <i class="fas fa-arrow-right"></i></a>  
+      </div>  
+    </div>  
+  </div>  
+</section>  <!-- GAMES -->  <section id="games">  
+  <div class="wrap">  
+    <div class="s-label rv"><span></span> 02 — Games</div>  
+    <h2 class="s-title rv">All <em>Games</em></h2>  
+    <div class="games-grid">  
+      <div class="game-card rv">  
+        <div class="gc-thumb">  
+          <div class="gc-corners">  
+            <div class="gc-corner-el tl"></div><div class="gc-corner-el tr"></div>  
+            <div class="gc-corner-el bl"></div><div class="gc-corner-el br"></div>  
+          </div>  
+          <div class="soon-badge">SOON</div>  
+        </div>  
+        <div class="gc-info">  
+          <div class="gc-name">Out Of Service</div>  
+          <div class="gc-genre">Arcade / Action</div>  
+          <div class="gc-yr">TBA — 202?</div>  
+        </div>  
+      </div>  
+    </div>  
+  </div>  
+</section>  <!-- TEAM -->  <section id="team">  
+  <div class="wrap">  
+    <div class="s-label rv"><span></span> 03 — Team</div>  
+    <div class="team-head">  
+      <h2 class="s-title" style="margin-bottom:0">The <em>Crew</em></h2>  
+      <div class="team-count">08</div>  
+    </div>  
+    <div class="team-grid" id="teamGrid"></div>  
+  </div>  
+</section>  <!-- ETHOS -->  <section id="ethos" class="ethos">  
+  <div class="ethos-bg-txt">NABTAR</div>  
+  <div class="ethos-inner">  
+    <div class="ethos-l">  
+      <div class="s-label rv"><span></span> 04 — Ethos</div>  
+      <div class="ethos-q rv"><span class="ghost">Designing</span>The <span class="lit">Un</span>expected</div>  
+      <p class="ethos-desc rv">Nabtar is driven by passion, creativity, and the belief that games can be more than entertainment. We make experiences that stay with you.</p>  
+    </div>  
+    <div class="ethos-r">  
+      <div class="pillar rv"><div class="pillar-n">01</div><div class="pillar-body"><div class="pillar-ico"><i class="fas fa-fire"></i></div><h3>Passion-Driven</h3><p>Every line of code, every asset — built with genuine love for the craft.</p></div></div>  
+      <div class="pillar rv"><div class="pillar-n">02</div><div class="pillar-body"><div class="pillar-ico"><i class="fas fa-lightbulb"></i></div><h3>Experimental</h3><p>We reject the safe path. We explore genres, blend mechanics, and push what indie games can feel like.</p></div></div>  
+      <div class="pillar rv"><div class="pillar-n">03</div><div class="pillar-body"><div class="pillar-ico"><i class="fas fa-users"></i></div><h3>Community First</h3><p>We build with our players, not just for them. Feedback shapes everything.</p></div></div>  
+    </div>  
+  </div>  
+</section>  <!-- TRAILER -->  <section id="trailer">  
+  <div class="wrap">  
+    <div class="s-label rv"><span></span> 05 — Trailer</div>  
+    <h2 class="s-title rv">Official <em>Trailer</em></h2>  
+    <div class="trailer-box rv">  
+      <div class="t-ico"><i class="fas fa-film"></i></div>  
+      <div class="t-h">No Trailer Yet</div>  
+      <div class="t-sub">The cinematic universe is loading...</div>  
+      <div class="t-tag"><i class="fas fa-circle blink-dot"></i> Coming Soon</div>  
+    </div>  
+  </div>  
+</section>  <footer>  
+  <a href="#" class="f-logo">NAB<span class="accent">T</span>AR</a>  
+  <div class="f-socials">  
+    <a href="https://youtube.com/@nabtaxstudio" target="_blank"><i class="fab fa-youtube"></i></a>  
+    <a href="https://nabtax-studio.itch.io/" target="_blank"><i class="fab fa-itch-io"></i></a>  
+    <a href="https://discord.gg/ZfpJCPSvS5" target="_blank"><i class="fab fa-discord"></i></a>  
+  </div>  
+  <div class="f-copy">© 2026 Nabtar Studio · Made with passion</div>  
+</footer>  <script>  
+(function(){  
+  
+  /* ── CURSOR ── */  
+  const curDot = document.querySelector('.cur-dot');  
+  const curRing = document.querySelector('.cur-ring');  
+  let mx=0,my=0,rx=0,ry=0;  
+  document.addEventListener('mousemove',e=>{  
+    mx=e.clientX; my=e.clientY;  
+    curDot.style.cssText=`left:${mx}px;top:${my}px`;  
+  });  
+  (function loop(){  
+    rx+=(mx-rx)*.1; ry+=(my-ry)*.1;  
+    curRing.style.cssText=`left:${rx}px;top:${ry}px`;  
+    requestAnimationFrame(loop);  
+  })();  
+  
+  /* ── NAV PROGRESS ── */  
+  const prog=document.getElementById('navProg');  
+  window.addEventListener('scroll',()=>{  
+    prog.style.width=(window.scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';  
+  },{passive:true});  
+  
+  /* ── CANVAS PARTICLES ── */  
+  const canvas=document.getElementById('heroCanvas');  
+  const ctx=canvas.getContext('2d');  
+  let W,H,pts=[];  
+  function resize(){  
+    W=canvas.width=canvas.offsetWidth;  
+    H=canvas.height=canvas.offsetHeight;  
+  }  
+  resize();  
+  window.addEventListener('resize',resize);  
+  
+  for(let i=0;i<80;i++){  
+    pts.push({  
+      x:Math.random()*1,y:Math.random()*1,  
+      vx:(Math.random()-.5)*.0003,vy:(Math.random()-.5)*.0003,  
+      r:Math.random()*1.2+.3,  
+      a:Math.random()*.5+.1,  
+      green:Math.random()>.85  
+    });  
+  }  
+  let mouse={x:.5,y:.5};  
+  canvas.addEventListener('mousemove',e=>{  
+    const r=canvas.getBoundingClientRect();  
+    mouse.x=(e.clientX-r.left)/W;  
+    mouse.y=(e.clientY-r.top)/H;  
+  });  
+  
+  function draw(){  
+    ctx.clearRect(0,0,W,H);  
+    pts.forEach(p=>{  
+      p.x+=p.vx; p.y+=p.vy;  
+      if(p.x<0)p.x=1; if(p.x>1)p.x=0;  
+      if(p.y<0)p.y=1; if(p.y>1)p.y=0;  
+      ctx.beginPath();  
+      ctx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);  
+      ctx.fillStyle=p.green ? `rgba(0,196,106,${p.a})` : `rgba(255,255,255,${p.a*.4})`;  
+      ctx.fill();  
+    });  
+    pts.filter(p=>p.green).forEach((a,i,arr)=>{  
+      arr.forEach((b,j)=>{  
+        if(j<=i)return;  
+        const dx=(a.x-b.x)*W, dy=(a.y-b.y)*H;  
+        const dist=Math.sqrt(dx*dx+dy*dy);  
+        if(dist<120){  
+          ctx.beginPath();  
+          ctx.moveTo(a.x*W,a.y*H);  
+          ctx.lineTo(b.x*W,b.y*H);  
+          ctx.strokeStyle=`rgba(0,196,106,${(.12*(1-dist/120))})`;  
+          ctx.lineWidth=.5;  
+          ctx.stroke();  
+        }  
+      });  
+    });  
+    requestAnimationFrame(draw);  
+  }  
+  draw();  
+  
+  /* ── TEAM ── */  
+  const members=[  
+    {name:"Abdulrahman Bakoush",role:"CEO & Dev",img:"https://i.postimg.cc/GmykF0SY/New-Project-059188A.png"},  
+    {name:"Mazen",role:"Dev & 3D Designer",img:"https://i.postimg.cc/1zBq9yjg/cb98496bcab361b8ce245f7cfa4fb926.png"},  
+    {name:"Adel",role:"Dev & Writer",img:"https://i.postimg.cc/Qx9bcgnn/Untitled13-20250701050551.png"},  
+    {name:"Hamed",role:"Developer",img:"https://i.postimg.cc/5tStwp5N/Untitled12-20260227144237.png"},  
+    {name:"Maaz",role:"Developer",img:"https://i.postimg.cc/C5p9hVKv/IMG-20251221-WA0007-1.jpg"},  
+    {name:"Sara",role:"Artist",img:"https://i.postimg.cc/CMtpQxNK/IMG-20250520-203852-921.webp"},  
+    {name:"SamKud",role:"Developer",img:"https://i.postimg.cc/3xx5Jt9h/de3465490119b3fd.png"},
+    {name:"Xeon Brix",role:"Artist",img:"https://i.postimg.cc/0jczvwKc/IMG-20260521-WA0020.jpg"}
+  ];  
+  const grid=document.getElementById('teamGrid');  
+  members.forEach((m,i)=>{  
+    const el=document.createElement('div');  
+    el.className='member';  
+    el.style.transitionDelay=(i*.07)+'s';  
+    el.innerHTML=`<div class="member-frame"><img class="member-pic" src="${m.img}" alt="${m.name}" onerror="this.src='https://placehold.co/76x76/181818/00c46a?text=${encodeURIComponent(m.name[0])}'" loading="lazy"></div><div class="member-name">${m.name}</div><div class="member-role">${m.role}</div>`;  
+    grid.appendChild(el);  
+  });  
+  
+  /* ── SCROLL REVEAL ── */  
+  const obs=new IntersectionObserver(es=>{  
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});  
+  },{threshold:.08});  
+  document.querySelectorAll('.rv,.member').forEach(el=>obs.observe(el));  
+  
+  /* ── SECTION FADE ON SCROLL ── */  
+  const sections = document.querySelectorAll('section');  
+  const sectionObserver = new IntersectionObserver((entries) => {  
+    entries.forEach(entry => {  
+      if(entry.isIntersecting) {  
+        entry.target.classList.add('visible');  
+      }  
+    });  
+  }, { threshold: 0.15 });  
+  sections.forEach(section => sectionObserver.observe(section));  
+  
+})();  
+</script>  </body>  
 </html>

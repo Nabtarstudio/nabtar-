@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+<title>NABTAR — Indie Game Studio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+
+:root{
+  --g:#00c46a;
+  --g2:#00e87a;
+
+  --bg:#0d0d0d;
+  --bg2:#111111;
+
+  --s1:#181818;
+  --s2:#202020;
+  --s3:#2a2a2a;
+
+  --hi:#f0f0f0;
+  --mid:#707070;
+  --lo:#353535;
+}
+
+*,
+*::before,
+*::after{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--bg);
+  color:var(--hi);
+  font-family:'Syne',sans-serif;
+  overflow-x:hidden;
+}
+
+canvas{
+  display:block;
+}
+
+::-webkit-scrollbar{
+  width:2px;
+}
+
+::-webkit-scrollbar-track{
+  background:var(--bg);
+}
+
+::-webkit-scrollbar-thumb{
+  background:var(--g);
+}
+
+/* ===== Cursor ===== */
+
+@media (pointer:fine){
+
+  body{
+    cursor:none;
+  }
+
+}
+
+#cur{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:99999;
+  pointer-events:none;
+}
+
+.cur-dot{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:var(--g);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+}
+
+.cur-ring{
+  position:absolute;
+  width:32px;
+  height:32px;
+  border:1px solid rgba(0,196,106,.5);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+}
+
+/* ===== Scanlines ===== */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:5;
+
+  background:
+  repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,.08) 0px,
+    rgba(0,0,0,.08) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+
+  box-shadow:inset 0 0 50px rgba(0,0,0,.3);
+}
+
+/* ===== NAV ===== */
+
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+
+  z-index:900;
+
+  height:56px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 4rem;
+}
+
+nav::before{
+  content:'';
+  position:absolute;
+  inset:0;
+
+  background:rgba(13,13,13,.92);
+
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+
+  border-bottom:1px solid var(--s2);
+
+  z-index:-1;
+}
+
+.n-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem;
+  letter-spacing:8px;
+
+  color:var(--hi);
+  text-decoration:none;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.n-logo .dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--g);
+
+  animation:blink 2s ease-in-out infinite;
+}
+
+@keyframes blink{
+  0%,100%{opacity:1;}
+  50%{opacity:.2;}
+}
+
+.n-links{
+  display:flex;
+  list-style:none;
+  gap:.2rem;
+}
+
+.n-links a{
+  font-family:'Space Mono',monospace;
+  font-size:.52rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+
+  color:var(--mid);
+
+  text-decoration:none;
+
+  padding:.35rem 1rem;
+}
+
+.n-links a:hover{
+  color:var(--hi);
+}
+
+.n-socials{
+  display:flex;
+  align-items:center;
+  gap:1.2rem;
+}
+
+.n-socials a{
+  color:var(--lo);
+  font-size:.85rem;
+}
+
+.n-socials a:hover{
+  color:var(--g);
+}
+
+.n-prog{
+  position:absolute;
+  left:0;
+  bottom:0;
+
+  width:0%;
+  height:1px;
+
+  background:var(--g);
+
+  box-shadow:0 0 6px var(--g);
+}
+
+@media(max-width:768px){
+
+  nav{
+    padding:0 1.5rem;
+  }
+
+  .n-links{
+    display:none;
+  }
+
+}
+
+/* ===== HERO ===== */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+
+  min-height:100vh;
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(0,0,0,.85) 0%,
+    rgba(0,30,15,.8) 100%
+  ),
+
+  url('https://images.pexels.com/photos/29823568/pexels-photo-29823568.jpeg?auto=compress&cs=tinysrgb&w=1600');
+
+  background-size:cover;
+  background-position:center;
+  background-attachment:scroll;
+}
+
+#heroCanvas{
+  position:absolute;
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  z-index:0;
+}
+
+.hero-glow{
+  position:absolute;
+  inset:0;
+
+  pointer-events:none;
+
+  z-index:1;
+
+  background:
+  radial-gradient(
+    ellipse 80% 60% at 68% 50%,
+    rgba(0,196,106,.055) 0%,
+    transparent 55%
+  );
+}
+
+.hero-vignette{
+  position:absolute;
+  inset:0;
+
+  pointer-events:none;
+
+  z-index:2;
+
+  background:
+  radial-gradient(
+    ellipse 100% 100% at 50% 50%,
+    transparent 50%,
+    rgba(0,0,0,.55) 100%
+  );
+}
+
+.hero-split{
+  position:relative;
+  z-index:10;
+
+  min-height:100vh;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+
+  gap:4rem;
+
+  padding:0 5rem;
+}
+
+.hero-l{
+  display:flex;
+  flex-direction:column;
+  gap:2rem;
+}
+
+.hero-tag{
+  font-family:'Space Mono',monospace;
+  font-size:.5rem;
+  letter-spacing:5px;
+  text-transform:uppercase;
+
+  color:var(--g);
+}
+
+.hero-h{
+  font-family:'Bebas Neue',sans-serif;
+  line-height:.88;
+}
+
+.hero-h .line1{
+  display:block;
+  font-size:clamp(4.5rem,10vw,9rem);
+}
+
+.hero-h .line2{
+  display:block;
+
+  font-size:clamp(4.5rem,10vw,9rem);
+
+  color:transparent;
+
+  -webkit-text-stroke:1.5px var(--g);
+
+  position:relative;
+}
+
+.hero-h .line2::after{
+  content:'STUDIO';
+
+  position:absolute;
+  left:0;
+  top:0;
+
+  color:var(--g);
+
+  overflow:hidden;
+  width:0%;
+
+  white-space:nowrap;
+
+  animation:fillSweep 1.2s 1s forwards;
+}
+
+@keyframes fillSweep{
+  to{
+    width:100%;
+  }
+}
+
+.hero-desc{
+  max-width:420px;
+
+  color:var(--mid);
+
+  line-height:1.8;
+}
+
+.hero-cta{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+
+/* ===== Buttons ===== */
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:.7rem;
+
+  text-decoration:none;
+
+  padding:.9rem 1.7rem;
+
+  font-family:'Space Mono',monospace;
+  font-size:.58rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.btn-primary{
+  background:var(--g);
+  color:#0d0d0d;
+}
+
+.btn-outline{
+  border:1px solid var(--s3);
+  color:var(--mid);
+}
+
+.btn-outline:hover{
+  color:var(--hi);
+}
+
+/* ===== GEO ===== */
+
+.geo{
+  position:relative;
+  width:340px;
+  height:340px;
+}
+
+.geo-sq,
+.geo-sq2,
+.geo-diamond,
+.geo-circle{
+  position:absolute;
+  border:1px solid rgba(0,196,106,.2);
+
+  animation:spinSq linear infinite;
+}
+
+.geo-sq{
+  inset:0;
+  animation-duration:30s;
+}
+
+.geo-sq2{
+  inset:40px;
+  animation-duration:20s;
+  animation-direction:reverse;
+}
+
+.geo-diamond{
+  inset:80px;
+  transform:rotate(45deg);
+  animation-duration:12s;
+}
+
+.geo-circle{
+  inset:120px;
+  border-radius:50%;
+  animation-duration:6s;
+  animation-direction:reverse;
+}
+
+@keyframes spinSq{
+  from{
+    transform:rotate(0deg);
+  }
+
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.geo-core{
+  position:absolute;
+  top:50%;
+  left:50%;
+
+  width:16px;
+  height:16px;
+
+  border-radius:50%;
+
+  background:var(--g);
+
+  transform:translate(-50%,-50%);
+}
+
+.geo-txt{
+  position:absolute;
+  top:50%;
+  left:50%;
+
+  transform:translate(-50%,-50%);
+
+  text-align:center;
+
+  font-family:'Bebas Neue',sans-serif;
+  letter-spacing:8px;
+
+  color:rgba(0,196,106,.25);
+}
+
+/* ===== Sections ===== */
+
+section{
+  position:relative;
+  padding:7rem 0;
+
+  opacity:0;
+  transform:translateY(30px);
+
+  transition:
+  opacity .7s ease,
+  transform .7s ease;
+}
+
+section.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.wrap{
+  max-width:1200px;
+  margin:0 auto;
+
+  padding:0 4rem;
+}
+
+.s-label{
+  font-family:'Space Mono',monospace;
+  font-size:.5rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+
+  color:var(--g);
+
+  margin-bottom:1.5rem;
+}
+
+.s-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,7vw,6rem);
+
+  margin-bottom:4rem;
+}
+
+.s-title em{
+  color:transparent;
+  -webkit-text-stroke:1px var(--g);
+  font-style:normal;
+}
+
+/* ===== Featured ===== */
+
+#featured{
+  background:var(--bg2);
+}
+
+.feat{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  border:1px solid var(--s2);
+
+  background:var(--bg);
+}
+
+.feat-img-side{
+  min-height:480px;
+  overflow:hidden;
+}
+
+.feat-img-side img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  opacity:.8;
+
+  transition:
+  transform .5s ease,
+  opacity .4s ease;
+}
+
+.feat:hover .feat-img-side img{
+  transform:scale(1.03);
+  opacity:.95;
+}
+
+.feat-info{
+  padding:4rem;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.feat-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,5vw,4.5rem);
+
+  line-height:.9;
+}
+
+.feat-desc{
+  margin-top:2rem;
+
+  color:var(--mid);
+
+  line-height:1.8;
+}
+
+/* ===== Footer ===== */
+
+footer{
+  padding:2rem 4rem;
+
+  border-top:1px solid var(--s2);
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+
+  gap:1rem;
+}
+
+.f-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem;
+  letter-spacing:8px;
+
+  text-decoration:none;
+  color:var(--hi);
+}
+
+.f-logo .accent{
+  color:var(--g);
+}
+
+.f-socials{
+  display:flex;
+  gap:1rem;
+}
+
+.f-socials a{
+  color:var(--lo);
+}
+
+.f-socials a:hover{
+  color:var(--g);
+}
+
+.f-copy{
+  font-family:'Space Mono',monospace;
+  font-size:.5rem;
+  letter-spacing:2px;
+
+  color:var(--lo);
+}
+
+/* ===== Responsive ===== */
+
+@media(max-width:768px){
+
+  .hero-split{
+    grid-template-columns:1fr;
+    padding:0 1.5rem;
+  }
+
+  .hero-r{
+    display:none;
+  }
+
+  .wrap{
+    padding:0 1.5rem;
+  }
+
+  .feat{
+    grid-template-columns:1fr;
+  }
+
+  footer{
+    padding:2rem 1.5rem;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="cur">
+  <div class="cur-dot"></div>
+  <div class="cur-ring"></div>
+</div>
+
+<nav>
+
+  <a href="#" class="n-logo">
+    <div class="dot"></div>
+    NAB<span style="color:var(--g)">T</span>AR
+  </a>
+
+  <ul class="n-links">
+    <li><a href="#featured">Featured</a></li>
+    <li><a href="#games">Games</a></li>
+    <li><a href="#team">Team</a></li>
+  </ul>
+
+  <div class="n-socials">
+
+    <a href="https://youtube.com/@nabtaxstudio" target="_blank">
+      <i class="fab fa-youtube"></i>
+    </a>
+
+    <a href="https://nabtax-studio.itch.io/" target="_blank">
+      <i class="fab fa-itch-io"></i>
+    </a>
+
+    <a href="https://discord.gg/ZfpJCPSvS5" target="_blank">
+      <i class="fab fa-discord"></i>
+    </a>
+
+  </div>
+
+  <div class="n-prog" id="navProg"></div>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <canvas id="heroCanvas"></canvas>
+
+  <div class="hero-glow"></div>
+  <div class="hero-vignette"></div>
+
+  <div class="hero-split">
+
+    <div class="hero-l">
+
+      <div class="hero-tag">
+        Indie Game Studio · Est. 2025
+      </div>
+
+      <h1 class="hero-h">
+        <span class="line1">NABTAR</span>
+        <span class="line2"></span>
+      </h1>
+
+      <p class="hero-desc">
+        We're a 7-person team building games that feel different — fast, unexpected, and impossible to put down.
+      </p>
+
+      <div class="hero-cta">
+
+        <a href="#featured" class="btn btn-primary">
+          <span>See Our Game</span>
+          <i class="fas fa-arrow-right"></i>
+        </a>
+
+        <a href="https://discord.gg/ZfpJCPSvS5" target="_blank" class="btn btn-outline">
+          Join Discord
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="hero-r">
+
+      <div class="geo">
+
+        <div class="geo-sq"></div>
+        <div class="geo-sq2"></div>
+        <div class="geo-diamond"></div>
+        <div class="geo-circle"></div>
+
+        <div class="geo-core"></div>
+
+        <div class="geo-txt">
+          NABTAR
+          <br>
+          GAMES
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FEATURED -->
+
+<section id="featured">
+
+  <div class="wrap">
+
+    <div class="s-label">
+      01 — Featured
+    </div>
+
+    <h2 class="s-title">
+      Featured <em>Game</em>
+    </h2>
+
+    <div class="feat">
+
+      <div class="feat-img-side">
+
+        <img
+        src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=700&auto=format&fit=crop&q=80"
+        alt="Out Of Service">
+
+      </div>
+
+      <div class="feat-info">
+
+        <div class="hero-tag">
+          Arcade / Action
+        </div>
+
+        <h3 class="feat-name">
+          Out Of
+          <br>
+          Service
+        </h3>
+
+        <p class="feat-desc">
+          A huge mall, locked doors, and only one way out. Drag and move through fast-paced arcade challenges, dodge obstacles, and escape before time runs out.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<footer>
+
+  <a href="#" class="f-logo">
+    NAB<span class="accent">T</span>AR
+  </a>
+
+  <div class="f-socials">
+
+    <a href="https://youtube.com/@nabtaxstudio" target="_blank">
+      <i class="fab fa-youtube"></i>
+    </a>
+
+    <a href="https://nabtax-studio.itch.io/" target="_blank">
+      <i class="fab fa-itch-io"></i>
+    </a>
+
+    <a href="https://discord.gg/ZfpJCPSvS5" target="_blank">
+      <i class="fab fa-discord"></i>
+    </a>
+
+  </div>
+
+  <div class="f-copy">
+    © 2026 Nabtar Studio · Made with passion
+  </div>
+
+</footer>
+
+<script>
+
+(function(){
+
+  /* ===== Cursor ===== */
+
+  const curDot = document.querySelector('.cur-dot');
+  const curRing = document.querySelector('.cur-ring');
+
+  let mx=0,my=0,rx=0,ry=0;
+
+  document.addEventListener('mousemove',e=>{
+
+    mx=e.clientX;
+    my=e.clientY;
+
+    curDot.style.left=mx+'px';
+    curDot.style.top=my+'px';
+
+  });
+
+  (function loop(){
+
+    rx+=(mx-rx)*.1;
+    ry+=(my-ry)*.1;
+
+    curRing.style.left=rx+'px';
+    curRing.style.top=ry+'px';
+
+    requestAnimationFrame(loop);
+
+  })();
+
+  /* ===== Nav Progress ===== */
+
+  const prog=document.getElementById('navProg');
+
+  window.addEventListener('scroll',()=>{
+
+    const h=document.body.scrollHeight-innerHeight;
+
+    prog.style.width=(window.scrollY/h*100)+'%';
+
+  },{passive:true});
+
+  /* ===== Canvas ===== */
+
+  const canvas=document.getElementById('heroCanvas');
+  const ctx=canvas.getContext('2d');
+
+  let W,H,pts=[];
+
+  function resize(){
+
+    W=canvas.width=canvas.offsetWidth;
+    H=canvas.height=canvas.offsetHeight;
+
+  }
+
+  resize();
+
+  window.addEventListener('resize',resize);
+
+  for(let i=0;i<35;i++){
+
+    pts.push({
+
+      x:Math.random(),
+      y:Math.random(),
+
+      vx:(Math.random()-.5)*.0003,
+      vy:(Math.random()-.5)*.0003,
+
+      r:Math.random()*1.2+.3,
+
+      a:Math.random()*.5+.1,
+
+      green:Math.random()>.85
+
+    });
+
+  }
+
+  function draw(){
+
+    ctx.clearRect(0,0,W,H);
+
+    pts.forEach(p=>{
+
+      p.x+=p.vx;
+      p.y+=p.vy;
+
+      if(p.x<0)p.x=1;
+      if(p.x>1)p.x=0;
+
+      if(p.y<0)p.y=1;
+      if(p.y>1)p.y=0;
+
+      ctx.beginPath();
+
+      ctx.arc(
+        p.x*W,
+        p.y*H,
+        p.r,
+        0,
+        Math.PI*2
+      );
+
+      ctx.fillStyle=p.green
+      ? `rgba(0,196,106,${p.a})`
+      : `rgba(255,255,255,${p.a*.4})`;
+
+      ctx.fill();
+
+    });
+
+    requestAnimationFrame(draw);
+
+  }
+
+  draw();
+
+  /* ===== Reveal ===== */
+
+  const sections=document.querySelectorAll('section');
+
+  const sectionObserver=new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+      if(entry.isIntersecting){
+
+        entry.target.classList.add('visible');
+
+      }
+
+    });
+
+  },{threshold:.15});
+
+  sections.forEach(section=>{
+
+    sectionObserver.observe(section);
+
+  });
+
+})();
+
+</script>
+
+</body>
+</html>
